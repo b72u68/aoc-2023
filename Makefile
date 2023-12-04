@@ -14,3 +14,9 @@ all:
 		touch "input/${FILENAME}.txt"; \
 		echo "${DIRNAME} created successfully."; \
 	fi
+
+build: lib/ bin/
+	dune build --profile release
+
+run:
+	dune exec aoc_2023 --profile release
