@@ -16,12 +16,32 @@ want to things up this time and use OCaml instead. I'm still experimenting with
 OCaml setup for Advent of Code so if my apologies the repo will be restructured
 multiple times.
 
+## Setup
+
+To build, run the following command:
+
+```
+make build
+```
+
+To run the built executable, run the following command:
+
+```
+make run
+```
+
+Currently setting the build command to be `dune build --profile release` to ignore
+warnings as errors. Similarly, the exec command is running `dune exec aoc_2023
+--profile release` to ignore the same errors.
+
+To run the solution of different day, change the `Day` module in `bin/main.ml`.
+
 ## Progress
 
 | Days   | Part 1             | Part 2             |
 | ------ | ------------------ | ------------------ |
 | Day 1  | :heavy_check_mark: | :heavy_check_mark: |
-| Day 2  |                    |                    |
+| Day 2  | :heavy_check_mark: | :heavy_check_mark: |
 | Day 3  |                    |                    |
 | Day 4  |                    |                    |
 | Day 5  |                    |                    |
@@ -45,3 +65,7 @@ multiple times.
 | Day 23 |                    |                    |
 | Day 24 |                    |                    |
 | Day 25 |                    |                    |
+
+```
+
+```
