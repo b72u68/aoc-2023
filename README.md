@@ -65,7 +65,3 @@ To run the solution of different day, change the `Day` module in `bin/main.ml`.
 | Day 23 |                    |                    |
 | Day 24 |                    |                    |
 | Day 25 |                    |                    |
-
-```
-
-```
