@@ -1,16 +1,10 @@
 (* Read input file *)
-let read_input () : string list =
-  let ic = open_in "input/day01.txt" in
-  let lines = ref [] in
-  try
-    while true do
-      let line = input_line ic in
-      lines := line :: !lines
-    done;
-    !lines
-  with End_of_file ->
-    close_in ic;
-    List.rev !lines
+let rec read_lines (ic : in_channel) : string list =
+  match input_line ic with
+  | line -> line :: read_lines ic
+  | exception End_of_file -> []
+
+let read_input () : string list = open_in "input/day01.txt" |> read_lines
 
 (* Helper functions *)
 type number_info = { value : int; str : string }
@@ -29,7 +23,7 @@ let number_record : number_info list =
   ]
 
 let int_value (c : char) = int_of_char c - int_of_char '0'
-let is_numeric (c : char) = match c with '0' .. '9' -> true | _ -> false
+let is_numeric (c : char) = '0' <= c && c <= '9'
 
 let get_digit_string (line : string) (idx : int) : int option =
   let num_opt =
@@ -57,14 +51,11 @@ let get_digits (line : string) (is_part_2 : bool) : int list =
   in
   aux 0 []
 
-(* Process input *)
-let lines = read_input ()
-
 (* Solver *)
-let part_1 () =
+let get_calibration (lines: string list) (is_part_2: bool) =
   List.fold_left
     (fun acc line ->
-      let digits = get_digits line false in
+      let digits = get_digits line is_part_2 in
       try
         let d1 = List.nth digits 0 in
         let d2 = List.nth digits (List.length digits - 1) in
@@ -72,17 +63,11 @@ let part_1 () =
       with _ -> acc)
     0 lines
 
-let part_2 () =
-  List.fold_left
-    (fun acc line ->
-      let digits = get_digits line true in
-      try
-        let d1 = List.nth digits 0 in
-        let d2 = List.nth digits (List.length digits - 1) in
-        (d1 * 10) + d2 + acc
-      with _ -> acc)
-    0 lines
+let part_1 lines = get_calibration lines false
+
+let part_2 lines = get_calibration lines true
 
 let solve () =
-  Printf.printf "Part 1: %d\n" (part_1 ());
-  Printf.printf "Part 2: %d\n" (part_2 ())
+  let lines = read_input () in
+  Printf.printf "Part 1: %d\n" (part_1 lines);
+  Printf.printf "Part 2: %d\n" (part_2 lines)
