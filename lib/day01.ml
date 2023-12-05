@@ -38,21 +38,20 @@ let get_digit_string (line : string) (idx : int) : int option =
   match num_opt with Some num_rec -> Some num_rec.value | None -> None
 
 let get_digits (line : string) (is_part_2 : bool) : int list =
-  let rec aux (idx : int) (acc : int list) =
-    if idx >= String.length line then acc
-    else
-      let rest = aux (idx + 1) acc in
-      if is_numeric line.[idx] then int_value line.[idx] :: rest
+  String.fold_left
+    (fun (idx, digits) c ->
+      let nidx = idx + 1 in
+      if is_numeric c then (nidx, int_value c :: digits)
       else if is_part_2 then
         match get_digit_string line idx with
-        | Some d -> d :: rest
-        | None -> rest
-      else rest
-  in
-  aux 0 []
+        | Some d -> (nidx, d :: digits)
+        | None -> (nidx + 1, digits)
+      else (nidx, digits))
+    (0, []) line
+  |> snd |> List.rev
 
 (* Solver *)
-let get_calibration (lines: string list) (is_part_2: bool) =
+let get_calibration (lines : string list) (is_part_2 : bool) =
   List.fold_left
     (fun acc line ->
       let digits = get_digits line is_part_2 in
@@ -64,7 +63,6 @@ let get_calibration (lines: string list) (is_part_2: bool) =
     0 lines
 
 let part_1 lines = get_calibration lines false
-
 let part_2 lines = get_calibration lines true
 
 let solve () =
