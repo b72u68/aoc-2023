@@ -12,6 +12,7 @@ all:
 		touch ${DIRNAME}; \
 		cp ${TEMPLATEFILE} ${DIRNAME}; \
 		touch "input/${FILENAME}.txt"; \
+		touch "input/test${DAY}.txt"; \
 		echo "${DIRNAME} created successfully."; \
 	fi
 
