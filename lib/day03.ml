@@ -67,7 +67,7 @@ let get_gears (line : string) =
          if is_gear c then (idx + 1, idx :: acc) else (idx + 1, acc))
        (0, []) line)
 
-let get_engine_numbers engine : (string * (int * int * int) list) list =
+let map_engine_numbers engine : (string * (int * int * int) list) list =
   List.map (fun line -> (line, get_numbers line)) engine
 
 let get_gear_part_numbers (nums : (int * int * int) list) (idx : int) :
@@ -99,7 +99,7 @@ let rec get_gear_sum = function
 
 (* Solver *)
 let part_1 engine = get_engine_sum engine
-let part_2 engine = get_gear_sum (get_engine_numbers engine)
+let part_2 engine = get_gear_sum (map_engine_numbers engine)
 
 let solve () =
   let engine = normalize_schematic (read_input ()) in
