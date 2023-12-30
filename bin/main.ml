@@ -1,3 +1,3 @@
 open Aoc_2023
 
-let () = Day03.solve ()
+let () = Day04.solve ()
