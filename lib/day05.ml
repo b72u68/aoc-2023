@@ -76,6 +76,6 @@ let part_2 (seed_ranges, maps) =
   List.fold_left min (List.hd locations) locations
 
 let solve () =
-  let ((seeds, maps) as lines) = read_input () in
+  let lines = read_input () in
   Printf.printf "Part 1: %d\n" (part_1 lines);
   Printf.printf "Part 2: %d\n" (part_2 lines)
