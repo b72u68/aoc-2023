@@ -57,9 +57,6 @@ let get_total_win_recs races =
   List.fold_left (fun acc r -> get_win_records r * acc) 1 races
 
 (* Solver *)
-let part_1 races = List.fold_left (fun acc r -> get_win_records r * acc) 1 races
-let part_2 races = List.fold_left (fun acc r -> get_win_records r * acc) 1 races
-
 let solve (run_test : bool) =
   let fn = if run_test then "input/test06.txt" else "input/day06.txt" in
   let get_races = read_input fn in
