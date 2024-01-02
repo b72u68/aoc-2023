@@ -1,5 +1,5 @@
 (* Read input file *)
-type race = { t : int; d : int }
+type race = { t : float; d : float }
 
 let is_number c = '0' <= c && c <= '9'
 
@@ -25,12 +25,12 @@ let rec read_lines (ic : in_channel) =
 let process_lines (part_2 : bool) = function
   | [ time; distance ] ->
       let time =
-        if part_2 then [ int_of_string (String.concat "" time) ]
-        else List.map int_of_string time
+        if part_2 then [ float_of_string (String.concat "" time) ]
+        else List.map float_of_string time
       in
       let distance =
-        if part_2 then [ int_of_string (String.concat "" distance) ]
-        else List.map int_of_string distance
+        if part_2 then [ float_of_string (String.concat "" distance) ]
+        else List.map float_of_string distance
       in
       List.map2 (fun t d -> { t; d }) time distance
   | _ -> failwith "Invalid input file"
@@ -39,18 +39,18 @@ let read_input (filename : string) (part_2 : bool) =
   open_in filename |> read_lines |> process_lines part_2
 
 (* Helper functions *)
-let string_of_race r = Printf.sprintf "time=%d; distance=%d" r.t r.d
+let string_of_race r = Printf.sprintf "time=%.1f; distance=%.1f" r.t r.d
 
 (* The winning holding time x can be calculated using:
     (x - t/2)^2 < t^2/4 - d
 *)
 let get_win_records r =
-  let rhs = (float_of_int (r.t * r.t) /. 4.) -. float_of_int r.d in
+  let rhs = (r.t *. r.t /. 4.) -. r.d in
   if rhs < 0. then 0
   else
     let sr = Float.sqrt rhs in
-    let h = sr +. (float_of_int r.t /. 2.) in
-    let l = max (0. -. sr +. (float_of_int r.t /. 2.)) 0. in
+    let h = sr +. (r.t /. 2.) in
+    let l = max (0. -. sr +. (r.t /. 2.)) 0. in
     int_of_float (Float.ceil h) - int_of_float (Float.floor l) - 1
 
 let get_total_win_recs races =
