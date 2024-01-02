@@ -3,7 +3,7 @@ DAY=$(shell TZ=America/New_York date '+%d')
 FILENAME="day${DAY}"
 DIRNAME="lib/${FILENAME}.ml"
 
-.PHONY: all
+.PHONY: all run test
 
 all:
 	@if [ -f ${DIRNAME} ]; then \
@@ -21,3 +21,6 @@ build: lib/ bin/
 
 run:
 	dune exec aoc_2023 --profile release
+
+test:
+	dune exec aoc_2023 --profile release test
