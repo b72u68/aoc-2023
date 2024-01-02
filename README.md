@@ -44,8 +44,8 @@ To run the solution of different day, change the `Day` module in `bin/main.ml`.
 | Day 2  | :heavy_check_mark: | :heavy_check_mark: |
 | Day 3  | :heavy_check_mark: | :heavy_check_mark: |
 | Day 4  | :heavy_check_mark: | :heavy_check_mark: |
-| Day 5  |                    |                    |
-| Day 6  |                    |                    |
+| Day 5  | :heavy_check_mark: |                    |
+| Day 6  | :heavy_check_mark: | :heavy_check_mark: |
 | Day 7  |                    |                    |
 | Day 8  |                    |                    |
 | Day 9  |                    |                    |
